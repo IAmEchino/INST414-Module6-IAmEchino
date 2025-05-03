@@ -24,7 +24,7 @@ TRANSISTOR_REGEX = r'<dt>Transistors</dt>\s*<dd>(.+?)</dd>'
 CSV_FILE = "gpu_data_all.csv"
 
 BRANDS = ["NVIDIA", "AMD", "Intel", "ATI", "Apple"]
-YEARS = list(range(2000, 2025))
+YEARS = list(range(1986, 2026))
 IGP_OPTIONS = ["Yes", "No"]
 
 def fetch(url):
@@ -81,7 +81,9 @@ def main():
 
             links = extract_links(html)
             if not links:
-                print("    No results found.")
+                no_results_sleep_time = random.uniform(10, 30)
+                print(f"    No results found. Sleeping for {no_results_sleep_time} seconds.")
+                time.sleep(no_results_sleep_time)
                 break
 
             new_links = [l for l in links if l not in seen]
